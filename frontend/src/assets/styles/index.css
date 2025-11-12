@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+/* Темы */
+:root {
+  /* Светлая тема */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border-color: rgba(4, 120, 87, 0.2);
+  
+  /* Minecraft green colors */
+  --color-minecraft-green-50: #f0fdf4;
+  --color-minecraft-green-100: #dcfce7;
+  --color-minecraft-green-200: #bbf7d0;
+  --color-minecraft-green-300: #86efac;
+  --color-minecraft-green-400: #4ade80;
+  --color-minecraft-green-500: #10b981;
+  --color-minecraft-green-600: #059669;
+  --color-minecraft-green-700: #047857;
+  --color-minecraft-green-800: #065f46;
+  --color-minecraft-green-900: #064e3b;
+}
+
+/* Date Picker Styles */
+input[type="datetime-local"] {
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type="datetime-local"]::-webkit-inner-spin-button,
+input[type="datetime-local"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Dark theme calendar */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+[data-theme="dark"] input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+}
+
+
+/* Темная тема */
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(16, 185, 129, 0.3);
+}
+
+@layer base {
+  * {
+    border-color: var(--border-color);
+  }
+
+  body {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-minecraft {
+    background: linear-gradient(135deg, var(--color-minecraft-green-500), var(--color-minecraft-green-600));
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.25);
+    border: 2px solid var(--color-minecraft-green-700);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-minecraft::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-minecraft:hover::before {
+    left: 100%;
+  }
+
+  .btn-minecraft:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-minecraft:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-minecraft:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-minecraft-outline {
+    background-color: transparent;
+    color: var(--color-minecraft-green-500);
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.15);
+    border: 2px solid var(--color-minecraft-green-500);
+  }
+
+  .btn-minecraft-outline:hover {
+    background-color: var(--color-minecraft-green-500);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Cards */
+  .card-minecraft {
+    background-color: var(--bg-primary);
+    border-radius: 0.75rem;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--border-color);
+    transition: all 0.2s;
+    backdrop-filter: blur(10px);
+  }
+
+  [data-theme="dark"] .card-minecraft {
+    background-color: var(--bg-secondary);
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-minecraft:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  [data-theme="dark"] .card-minecraft:hover {
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Inputs */
+  .input-minecraft {
+    width: 100%;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  .input-minecraft:focus {
+    outline: none;
+    border-color: var(--color-minecraft-green-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+
+  .input-minecraft::placeholder {
+    color: var(--text-secondary);
+  }
+
+  /* Select */
+  .select-minecraft {
+    width: 100%;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.2s;
+  }
+
+  .select-minecraft:focus {
+    outline: none;
+    border-color: var(--color-minecraft-green-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+
+  /* Theme toggle button */
+  .theme-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-primary);
+  }
+
+  .theme-toggle:hover {
+    background-color: var(--color-minecraft-green-500);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  /* Decorative elements */
+  .minecraft-square {
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--color-minecraft-green-500);
+    transform: rotate(45deg);
+    position: absolute;
+    opacity: 0.3;
+  }
+}
+
+@layer utilities {
+  .gradient-minecraft {
+    background: linear-gradient(135deg, #4ade80 0%, #059669 100%);
+  }
+
+  .text-gradient-minecraft {
+    background: linear-gradient(to right, #4ade80, #059669);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+}
+
+/* Animations */
+@keyframes wave {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-minecraft-green-500);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-minecraft-green-600);
+}
+
+/* Loading animation */
+.loading-dots {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.loading-dots span {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-minecraft-green-500);
+  border-radius: 9999px;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+/* Transition для смены темы */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
